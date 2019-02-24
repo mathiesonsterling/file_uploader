@@ -14,7 +14,7 @@ class BaseRepository:
 
     @staticmethod
     def get_db_session():
-        db_string = "postgres://postgres:password@localhost:5432/customer_purchases"
+        db_string = "postgres://postgres:password@db:5432/customer_purchases"
         engine = create_engine(db_string)
         db_session = sessionmaker(bind=engine)
         BaseEntity.metadata.create_all(engine)

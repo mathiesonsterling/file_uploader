@@ -12,6 +12,8 @@ RUN \
 
 COPY . /usr/src/app
 
+RUN mkdir /data
+
 EXPOSE 8080
 
 ENTRYPOINT ["python3"]
