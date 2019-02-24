@@ -1,0 +1,56 @@
+---
+swagger: "2.0"
+info:
+  description: "Uploads input file and stores resuls in a database"
+  version: "1.0.0"
+  title: "Mathieson Sterling File Uploader"
+  contact:
+    email: "mathieson.sterling@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "github.com"
+basePath: "/v1"
+tags:
+- name: "customerPurchase"
+  description: "Customer Purchase records"
+schemes:
+- "https"
+- "http"
+paths:
+  /customerpurchases/upload:
+    post:
+      tags:
+      - "customerPurchase"
+      summary: "Upload a datafile to the database"
+      description: ""
+      operationId: "uploadcustomerpurchasefile"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "upfile"
+        in: "formData"
+        description: "The file to upload."
+        required: false
+        type: "file"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/UploadResponse"
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.customer_purchase_controller"
+definitions:
+  UploadResponse:
+    type: "object"
+    properties:
+      numberOfRowsStored:
+        type: "integer"
+      numberOfErrorRows:
+        type: "integer"
+    example:
+      numberOfErrorRows: 6
+      numberOfRowsStored: 0
